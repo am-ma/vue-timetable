@@ -1,0 +1,36 @@
+h2 {
+    margin-bottom: .3rem;
+    margin-top: 1rem;
+}
+
+textarea {
+    width: 50rem;
+    height: 10rem;
+}
+input[type="number"] {
+    text-align: right;
+}
+
+.form-label:first-child {
+    width: 5rem !important;
+}
+.form-label:not(:first-child) {
+    margin-left: 1rem;
+}
+#timecol {
+    width: 4rem;
+}
+#timeformat {
+    width: 2rem;
+    text-align: center;
+}
+#url {
+    width: 50rem;
+}
+
+tr.done td {
+    background-color: #ccc;
+}
+tr.current td {
+    background-color: #f5c088;
+}

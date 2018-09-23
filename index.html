@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Time table</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/petal.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+</head>
+<body>
+    <header class="container">
+        <h1>Time table</h1>
+    </header>
+    <section id="app" class="container">
+        <h2>time table <small>(last update : {{ currentTime }})</small></h2>
+        <table class="table table-inner-borders table-striped table-condensed table-outer-borders">
+            <thead>
+                <tr>
+                    <td v-for="c in timetableHeader">
+                        {{ c }}
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="row in timetableBody" :class="{current: row.isCurrent, done: row.isDone}">
+                    <td v-for="c in row.cols">
+                        {{ c }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>template</h2>
+        <div class="form-inline">
+            <label class="form-label" for="timecol">時間の列</label>
+            <div class="input-group">
+                <input id="timecol" type="number" class="input" v-model="timeCol">
+                <span class="input-addon">列目</span>
+            </div>
+            <label class="form-label" for="timeformat">時間フォーマット</label>
+            <div class="input-group">
+                <span class="input-addon">23</span>
+                <input id="timeformat" type="text" class="input" v-model="timeSeparator">
+                <span class="input-addon">59</span>
+            </div>
+        </div>
+        <textarea class="input" v-model="tmpTimetable"></textarea>
+    </section>
+
+
+    <script src="js/vue.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
