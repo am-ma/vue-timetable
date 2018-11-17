@@ -11,7 +11,14 @@ var app = new Vue({
         currentTime: '',
     },
     mounted: function () {
+        var getValueSettleOrDefault = function (key, defaultValue) {
+            var val = localStorage.getItem(key);
+            return val === '' ? defaultValue : val;
+        };
         this.tmpTimetable = localStorage.getItem('vue-timeline.table');
+        this.timeCol = getValueSettleOrDefault('vue-timeline.timecol', 0);
+        this.timeAdjust = getValueSettleOrDefault('vue-timeline.timeadjust', 0);
+        this.timeSeparator = getValueSettleOrDefault('vue-timeline.timeseparator', ':');
     },
     watch: {
         /**
@@ -58,10 +65,23 @@ var app = new Vue({
             this._checkTimes();
         },
         /**
-         * 推してる時間
+         * 時間列
+         */
+        timeCol: function () {
+            localStorage.setItem('vue-timeline.timecol', this.timeCol);
+        },
+        /**
+         * 時間のセパレータ
+         */
+        timeSeparator: function () {
+            localStorage.setItem('vue-timeline.timeseparator', this.timeSeparator);
+        },
+        /**
+         * おしてる時間
          */
         timeAdjust: function () {
             setCurrentTime();
+            localStorage.setItem('vue-timeline.timeadjust', this.timeAdjust);
         },
     },
     methods: {
