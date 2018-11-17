@@ -35,6 +35,9 @@ var app = new Vue({
                         isCurrent: false,
                         isDone: false,
                     };
+                    if (times.fr === undefined && times.to === undefined) {
+                        console.log('row' + i + ': 開始・終了時間未設定');
+                    }
                     this.timetableBody.push(bodyRow);
                 }
             }
@@ -68,9 +71,9 @@ var app = new Vue({
                 fr: times[0],
                 to: times[times.length - 1],
             };
-            if (ret.fr === undefined && ret.to === undefined) {
-                throw new Error('時間設定が不正');
-            }
+            // if (ret.fr === undefined && ret.to === undefined) {
+            //     throw new Error('時間設定が不正');
+            // }
 
             return ret;
         },
@@ -80,7 +83,11 @@ var app = new Vue({
          */
         _checkIsDone: function (row) {
             if (row.to === undefined) {
-                row.isDone = false;
+                if (row.fr === undefined) {
+                    row.isDone = false;
+                } else {
+                    row.isDone = true;
+                }
             } else {
                 row.isDone = row.to < this.currentTime;
             }
