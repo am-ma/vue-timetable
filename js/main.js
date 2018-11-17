@@ -10,11 +10,17 @@ var app = new Vue({
         tmpTimetable: '',
         currentTime: '',
     },
+    mounted: function () {
+        this.tmpTimetable = localStorage.getItem('vue-timeline.table');
+    },
     watch: {
         /**
          * タイムテーブルの生成等
          */
         tmpTimetable: function () {
+            // save
+            localStorage.setItem('vue-timeline.table', this.tmpTimetable);
+            // 整形
             this.timetableHeader = [];
             this.timetableBody = [];
             var rows = this.tmpTimetable.split(/[\r\n]+/g);
@@ -59,6 +65,12 @@ var app = new Vue({
         },
     },
     methods: {
+        /**
+         * 時間の更新
+         */
+        refresh: function () {
+            setCurrentTime();
+        },
         /**
          * 開始・終了時間を取得
          * @param {string[]} row

@@ -13,7 +13,13 @@
         <h1>Time table</h1>
     </header>
     <section id="app" class="container">
-        <h2>time table <small>(last update : {{ currentTime }})</small></h2>
+        <h2>
+            time table
+            <small class="ml-10">
+                (last update : {{ currentTime }})
+                <button class="btn hollow compact" style="float: right;" @click="refresh()">refresh</button>
+            </small>
+        </h2>
         <table class="table table-inner-borders table-striped table-condensed table-outer-borders">
             <thead>
                 <tr>
