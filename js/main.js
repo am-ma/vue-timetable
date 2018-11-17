@@ -3,6 +3,7 @@ var app = new Vue({
     data: {
         updateMin: 5,
         timeCol: 0,
+        timeAdjust: 0,
         timeSeparator: ':',
         timetableHeader: [],
         timetableBody: [],
@@ -49,6 +50,12 @@ var app = new Vue({
          */
         currentTime: function () {
             this._checkTimes();
+        },
+        /**
+         * 推してる時間
+         */
+        timeAdjust: function () {
+            setCurrentTime();
         },
     },
     methods: {
@@ -117,6 +124,10 @@ var app = new Vue({
 var currentDate, currentTime;
 var setCurrentTime = function () {
     currentDate = new Date();
+    // 調整
+    if (app.timeAdjust) {
+        currentDate.setMinutes(currentDate.getMinutes() - parseInt(app.timeAdjust));
+    }
     var h = ('00' + currentDate.getHours()).slice(-2);
     var m = ('00' + currentDate.getMinutes()).slice(-2);
     Vue.set(app, 'currentTime', h + app.timeSeparator + m);
